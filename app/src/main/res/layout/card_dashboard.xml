@@ -9,10 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="180dp"
+        android:layout_height="145dp"
         android:layout_marginBottom="16dp">
-
-
 
         <TextView
             android:id="@+id/card_title"
@@ -47,7 +45,7 @@
             android:id="@+id/card_unit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kkal"
+            android:text="Kal"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/main_black"

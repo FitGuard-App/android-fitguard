@@ -2,6 +2,7 @@ package com.devforge.fitguard.ui.dashboard
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,10 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
 class DashboardFragment : Fragment() {
+
+    private var entries : List<BarEntry> = listOf()
+    private val days = arrayOf("Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu")
+
 
     private var _binding: FragmentDashboardBinding? = null
 
@@ -66,14 +71,20 @@ class DashboardFragment : Fragment() {
     }
 
     private fun loadCalorieData() {
-        val thisDay = DateHelper.getCurrentDate()
-        val dateFormatted = DateHelper.formatDateToIndo(thisDay)
+        val todayString = DateHelper.formatDateToIndo(DateHelper.getCurrentDate())
 
-        dashboardViewModel.getAllRecords().observe(requireActivity()) { record ->
-            val calorieToday = record.filter { it.date == dateFormatted }.sumOf { it.calorie }
+        dashboardViewModel.getAllRecords().observe(viewLifecycleOwner) { records ->
+            val calorieToday = records.filter {
+                it.date?.let { date ->
+                    DateHelper.formatDateToIndo(date)
+                } == todayString
+            }.sumOf { it.calorie }
+
+            Log.d("Calorie", calorieToday.toString())
             binding.cardCalorie.cardValue.text = calorieToday.toString()
         }
     }
+
 
     private fun loadTipsData() {
         binding.cardTips.cardTitle.text = "💡Tips"
@@ -85,13 +96,16 @@ class DashboardFragment : Fragment() {
 
     private fun loadDurationData() {
         binding.cardTime.cardTitle.text = "⌚️ Waktu"
-        val thisDay = DateHelper.getCurrentDate()
-        val dateFormatted = DateHelper.formatDateToIndo(thisDay)
+        val dateFormatted = DateHelper.formatDateToIndo(DateHelper.getCurrentDate())
 
         dashboardViewModel.getAllRecords().observe(requireActivity()) { record ->
-            val durationToday = record.filter { it.date == dateFormatted }.sumOf { it.totalDuration }
+            val durationToday = record.filter { it.date?.let { date ->
+                DateHelper.formatDateToIndo(
+                    date
+                )
+            } == dateFormatted }.sumOf { it.totalDuration }
             binding.cardTime.cardValue.text = durationToday.toString()
-            binding.cardTime.cardUnit.text = "Menit"
+            binding.cardTime.cardUnit.text = "Detik"
 
 
 
@@ -99,41 +113,73 @@ class DashboardFragment : Fragment() {
     }
 
     private fun populateChart() {
-        val defaultEntries = listOf(
-            BarEntry(0f, 12f),
-            BarEntry(1f, 12f),
-            BarEntry(2f,13f),
-            BarEntry(3f,14f),
-            BarEntry(4f,15f),
-            BarEntry(5f,16f),
-            BarEntry(6f,17f),
-            BarEntry(7f,18f),
-        )
+        dashboardViewModel.getAllRecords().observe(requireActivity()) { records ->
+//            for ((i, day) in days.withIndex()) {
+//                Log.d("DAYS", "${i}, ${day}")
+//                entries = it.mapIndexed { _, record ->
+//                    BarEntry(i.toFloat(), record.repetition.toFloat())
+//                }
+//            }
+            val grouped = records
+                .filter { it.date != null }
+                .groupBy { DateHelper.formatDateToIndo(it.date!!) }
 
-        val data = BarDataSet(defaultEntries, "").apply {
-            valueTextColor = resources.getColor(R.color.main_black)
-            color = resources.getColor(R.color.main_green)
+// Create ordered labels and bar entries
+            val labels = mutableListOf<String>()
+            val entries = mutableListOf<BarEntry>()
+
+            grouped.entries.forEachIndexed { index, entry ->
+                val dateLabel = entry.key // formatted date
+                val totalRepetition = entry.value.sumOf { it.repetition }
+
+                labels.add(dateLabel)
+                entries.add(BarEntry(index.toFloat(), totalRepetition.toFloat()))
+            }
+
+//            val labels = it.map { r -> DateHelper.formatDateToIndo(r.date!!) }
+
+
+            val data = BarDataSet(entries, "Progress").apply {
+                valueTextColor = resources.getColor(R.color.main_black)
+                color = resources.getColor(R.color.main_green)
+
+            }
+            binding.cardChart.barChart.data = BarData(data)
+
+//            val days = arrayOf("Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu")
+            binding.cardChart.barChart.xAxis.apply {
+//                valueFormatter = IndexAxisValueFormatter(days)
+                valueFormatter = IndexAxisValueFormatter(labels)
+                granularity = 1f
+                setLabelCount(labels.size)
+                position = XAxis.XAxisPosition.BOTTOM
+                textColor = resources.getColor(R.color.main_black)
+            }
+
+            binding.cardChart.barChart.axisLeft.apply {
+                textColor = resources.getColor(R.color.main_black)
+            }
+
+            data.valueTextColor = resources.getColor(R.color.main_black)
+            binding.cardChart.barChart.axisRight.isEnabled = false
+            binding.cardChart.barChart.description.isEnabled = false
+            binding.cardChart.barChart.legend.isEnabled = false
+
+            binding.cardChart.barChart.invalidate()
 
         }
-        binding.cardChart.barChart.data = BarData(data)
+//        val defaultEntries = listOf(
+//            BarEntry(0f, 12f),
+//            BarEntry(1f, 12f),
+//            BarEntry(2f,13f),
+//            BarEntry(3f,14f),
+//            BarEntry(4f,15f),
+//            BarEntry(5f,16f),
+//            BarEntry(6f,17f),
+//            BarEntry(7f,18f),
+//        )
 
-        val days = arrayOf("Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu")
-        binding.cardChart.barChart.xAxis.apply {
-            valueFormatter = IndexAxisValueFormatter(days)
-            position = XAxis.XAxisPosition.BOTTOM
-            textColor = resources.getColor(R.color.main_black)
-        }
 
-        binding.cardChart.barChart.axisLeft.apply {
-            textColor = resources.getColor(R.color.main_black)
-        }
-
-        data.valueTextColor = resources.getColor(R.color.main_black)
-        binding.cardChart.barChart.axisRight.isEnabled = false
-        binding.cardChart.barChart.description.isEnabled = false
-        binding.cardChart.barChart.legend.isEnabled = false
-
-        binding.cardChart.barChart.invalidate()
     }
 
     override fun onDestroyView() {
