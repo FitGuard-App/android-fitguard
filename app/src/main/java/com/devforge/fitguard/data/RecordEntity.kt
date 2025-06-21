@@ -14,5 +14,9 @@ data class RecordEntity(
     @ColumnInfo(name = "repetition")
     val repetition: Int = 0,
     @ColumnInfo(name = "totalDuration")
-    val totalDuration: Int = 0
+    val totalDuration: Int = 0,
+    @ColumnInfo(name = "exercise_count")
+    val exerciseCount: Int = 0,
+    @ColumnInfo(name = "date")
+    val date: String? = null
 )
