@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="64dp"
     android:gravity="center_horizontal"
     android:background="#1C1C1C">
 
@@ -12,8 +13,8 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@drawable/logo_no_text"
-    android:contentDescription="App Logo"
-    android:layout_marginBottom="32dp" />
+        android:contentDescription="App Logo"
+        android:layout_marginBottom="32dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -58,9 +59,9 @@
         <RadioButton
             android:id="@+id/oneMonthOption"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/bg_option_unselected"
-            android:text="Rp20.000/bulan"
+            android:text="1 Bulan\nRp20.000/bulan"
             android:fontFamily="@font/inter_bold"
             android:textColor="@color/main_black"
             android:textStyle="bold"
@@ -73,9 +74,9 @@
         <RadioButton
             android:id="@+id/twelveMonthOption"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/bg_option_unselected"
-            android:text="Rp.80.000/bulan"
+            android:text="12 Bulan \nRp.15.000/bulan"
             android:textColor="@color/main_black"
             android:fontFamily="@font/inter_bold"
             android:textStyle="bold"
@@ -108,7 +109,6 @@
         android:textStyle="bold"
         android:paddingVertical="12dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_button" />
+        android:layout_marginBottom="16dp"/>
 
 </LinearLayout>

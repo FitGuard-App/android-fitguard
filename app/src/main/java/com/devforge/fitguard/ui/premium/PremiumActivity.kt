@@ -1,6 +1,7 @@
 package com.devforge.fitguard.ui.premium
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,6 +18,10 @@ class PremiumActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        binding.subscribeButton.setOnClickListener {
+            Toast.makeText(this, "Belum tersedia saat ini", Toast.LENGTH_SHORT).show()
+        }
 
 
     }

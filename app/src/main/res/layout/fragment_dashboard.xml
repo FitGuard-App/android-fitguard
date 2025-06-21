@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/halo"
+        android:fontFamily="@font/inter_bold"
         android:textSize="24sp"
         android:textColor="@color/main_white"
         android:textStyle="bold"

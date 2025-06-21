@@ -26,6 +26,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Selamat Datang"
+        android:fontFamily="@font/inter_bold"
         android:textStyle="bold"
         android:textSize="24sp"
         android:textColor="@color/white"/>
@@ -37,6 +38,8 @@
         android:textColor="@color/white"
         android:text="FitGuard memandu latihan bodyweight-mu dengan deteksi postur real-time dan koreksi otomatis. Latihan jadi lebih efektif, cedera bisa dicegah."
         android:justificationMode="inter_character"
+        android:fontFamily="@font/inter"
+
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
