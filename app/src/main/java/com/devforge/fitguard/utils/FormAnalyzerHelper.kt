@@ -40,7 +40,7 @@ class FormAnalyzerHelper {
 
         when(categories) {
             "push up" -> {
-                if (jointAngles[7] < 30) {
+                if (jointAngles[7] < 40) {
                     message = "Overextension (siku terlalu turun (<30 derajat))"
                 }
 
@@ -54,7 +54,7 @@ class FormAnalyzerHelper {
             }
 
             "squat" -> {
-                if (jointAngles[3] < 30) {
+                if (jointAngles[9] < 40) {
                     message = "Badan terlalu condong"
                 }
             }

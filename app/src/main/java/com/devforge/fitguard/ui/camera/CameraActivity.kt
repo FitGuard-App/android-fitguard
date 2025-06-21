@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -32,6 +33,7 @@ import com.devforge.fitguard.utils.PoseLandmarkerHelper
 import com.devforge.fitguard.utils.RepetitionCounter
 import com.devforge.fitguard.utils.UserViewModelFactory
 import com.google.mediapipe.tasks.vision.core.RunningMode
+import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -56,6 +58,8 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
     private var userData : UserEntity? = null
 
     private var startTime: Long = 0
+
+    private lateinit var tts: TextToSpeech
 
     var poseAnalyzer = FormAnalyzerHelper()
 
@@ -85,7 +89,7 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
     private val repetitionCounters = mapOf(
         "Push-Up" to RepetitionCounter("Push-Up", thresholdDown = 70f, thresholdUp = 160f),
         "Sit-Up" to RepetitionCounter("Sit-Up", thresholdDown = 60f, thresholdUp = 130f),
-        "Squat" to RepetitionCounter("Squat", thresholdDown = 70f, thresholdUp = 160f)
+        "Squat" to RepetitionCounter("Squat", thresholdDown = 90f, thresholdUp = 160f)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,6 +111,17 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
 
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        tts = TextToSpeech(this) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val result = tts.setLanguage(Locale("id", "ID"))
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(this, "Bahasa tidak didukung", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Bahasa berhasil dipilih", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         // Initialize our background executor
         backgroundExecutor = Executors.newSingleThreadExecutor()
@@ -133,6 +148,10 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                 poseLandmarkerHelperListener = this
             )
         }
+    }
+
+    private fun speak(text: String) {
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
     // Initialize CameraX, and prepare to bind the camera use cases
@@ -276,6 +295,12 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                     level.toString()
                 )
 
+                if(text != "Tidak ada kesalahan") {
+                    if (text != null) {
+                        speak(text)
+                    }
+                }
+
                 binding.textRepetition.text = repetitionCounters[prediction]?.count.toString()
                 binding.textDuration.text = getDurationFormatted()
                 binding.textCorrection.text = text
@@ -342,6 +367,8 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
 
     override fun onDestroy() {
         super.onDestroy()
+        tts.stop()
+        tts.shutdown()
 
         // Shut down our background executor
         backgroundExecutor.shutdown()
