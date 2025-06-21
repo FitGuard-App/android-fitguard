@@ -1,5 +1,6 @@
 package com.devforge.fitguard.ui.setting
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.Toast
 import com.devforge.fitguard.R
 import com.devforge.fitguard.databinding.FragmentHistoryBinding
 import com.devforge.fitguard.databinding.FragmentSettingBinding
+import com.devforge.fitguard.ui.premium.PremiumActivity
 
 class SettingFragment : Fragment() {
 
@@ -38,8 +40,16 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.cardSetting.root.setOnClickListener {
+        binding.cardSetting.tvTitleNotification.setOnClickListener {
             Toast.makeText(requireContext(), "Belum tersedia saat ini", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.cardSetting.tvTitleUserData.setOnClickListener {
+            Toast.makeText(requireContext(), "Belum tersedia saat ini", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.cardSetting.tvPremium.setOnClickListener {
+            startActivity(Intent(requireContext(), PremiumActivity::class.java))
         }
     }
 }
