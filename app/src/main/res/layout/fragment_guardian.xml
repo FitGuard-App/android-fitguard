@@ -4,19 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fitguard.ui.home.HomeFragment">
+    android:fitsSystemWindows="true"
+    android:background="@color/main_black">
 
-    <TextView
-        android:id="@+id/text_home"
+    <ImageView
+        android:id="@+id/img_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/image_welcome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title_instruksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Instruksi"
+        android:textColor="@color/main_white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_top" />
+
+    <TextView
+        android:id="@+id/text_instruksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1. Berdiri sekitar 2 meter dari kamera.\n2. Pastikan kepala hingga kaki terlihat.\n3. Hindari cahaya belakang yang terlalu terang.\n4. Siap mulai? Lakukan gerakan sesuai instruksi.\n"
+        android:textSize="12sp"
+        android:textColor="@color/main_white"
+        app:layout_constraintStart_toStartOf="@id/tv_title_instruksi"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_instruksi"/>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/main_green"
+        android:text="Mulai"
+        android:textSize="16sp"
+        android:textColor="@color/main_white"
+        android:layout_marginBottom="24dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/text_instruksi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
