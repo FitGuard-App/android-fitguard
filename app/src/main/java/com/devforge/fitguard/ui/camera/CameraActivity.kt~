@@ -22,7 +22,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.devforge.fitguard.databinding.ActivityCameraBinding
 import com.devforge.fitguard.ui.result.ResultActivity
 import com.devforge.fitguard.utils.ClassifyHelper
-import com.devforge.fitguard.utils.FormAnalyzerHelper
 import com.devforge.fitguard.utils.MathHelper.processPose
 import com.devforge.fitguard.utils.PoseLandmarkerHelper
 import com.devforge.fitguard.utils.RepetitionCounter
@@ -50,8 +49,6 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
     private var cameraFacing = CameraSelector.LENS_FACING_FRONT
 
     private var startTime: Long = 0
-
-    var poseAnalyzer = FormAnalyzerHelper()
 
     private lateinit var poseClassifier: ClassifyHelper
     private val slidingWindow = mutableListOf<List<Float>>()
@@ -266,11 +263,8 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                     }
                 }
 
-                val text = poseAnalyzer.runModel(inputForModel, prediction, repetitionCounters[prediction]?.count ?: 0, "pemula")
-
                 binding.textRepetition.text = repetitionCounters[prediction]?.count.toString()
                 binding.textDuration.text = getDurationFormatted()
-                binding.textCorrection.text = text
             }
         }
     }
