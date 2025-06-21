@@ -1,0 +1,23 @@
+package com.devforge.fitguard.data
+
+class UserRepository(private val userDao: UserDao) {
+    fun insertUser(userEntity: UserEntity) {
+        userDao.insertUser(userEntity)
+    }
+
+    fun getUser(): UserEntity {
+        return userDao.getUser()
+    }
+
+
+    companion object {
+        @Volatile
+        private var INSTANCE: UserRepository? = null
+        fun getInstance(
+            userDao: UserDao
+        ): UserRepository =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: UserRepository(userDao)
+            }.also { INSTANCE = it }
+    }
+}
