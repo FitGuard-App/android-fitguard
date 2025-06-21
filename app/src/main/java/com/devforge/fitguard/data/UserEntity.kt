@@ -20,3 +20,7 @@ data class UserEntity(
     @ColumnInfo(name = "bodyHeight")
      val bodyHeight: Int = 0,
     )
+
+data class Landmark3D(
+    val x: Float, val y: Float, val z: Float
+)
