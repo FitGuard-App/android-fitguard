@@ -6,5 +6,237 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.result.ResultActivity">
+    
+    <TextView
+        android:id="@+id/text_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_result"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+    
+    <TextView
+        android:id="@+id/text_ringkas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/example_ringkas"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter_medium"
+        app:layout_constraintStart_toStartOf="@id/text_result"
+        app:layout_constraintTop_toBottomOf="@id/text_result" />
+
+    <View
+        android:id="@+id/bg_kalori"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bggreen"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@id/bg_durasi"
+        app:layout_constraintTop_toBottomOf="@id/text_ringkas"/>
+
+
+    <TextView
+        android:id="@+id/title_kalori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kalori"
+        android:textSize="16sp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/bg_kalori"
+        app:layout_constraintTop_toTopOf="@id/bg_kalori" />
+
+    <TextView
+        android:id="@+id/text_kalori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/repetition_example"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="24sp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/text_satuan"
+        app:layout_constraintStart_toStartOf="@id/bg_kalori" />
+
+    <TextView
+        android:id="@+id/text_satuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kalori"
+        android:textSize="14sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/bg_kalori"
+        app:layout_constraintBottom_toBottomOf="@id/bg_kalori"
+        android:layout_margin="16dp" />
+
+    <View
+        android:id="@+id/bg_durasi"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bggreen"
+        app:layout_constraintStart_toEndOf="@id/bg_kalori"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_ringkas" />
+
+    <TextView
+        android:id="@+id/title_durasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/durasi"
+        android:textSize="16sp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/bg_durasi"
+        app:layout_constraintTop_toTopOf="@id/bg_durasi" />
+
+    <TextView
+        android:id="@+id/text_durasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_example"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="24sp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/text_satuan_durasi"
+        app:layout_constraintStart_toStartOf="@id/bg_durasi" />
+
+    <TextView
+        android:id="@+id/text_satuan_durasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detik"
+        android:textSize="14sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/bg_durasi"
+        app:layout_constraintBottom_toBottomOf="@id/bg_durasi"
+        android:layout_margin="16dp" />
+
+    <View
+        android:id="@+id/bg_repetisi"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bggreen"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@id/bg_total"
+        app:layout_constraintTop_toBottomOf="@id/bg_durasi"/>
+
+    <TextView
+        android:id="@+id/title_repetisi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/repetisi"
+        android:textSize="16sp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/bg_repetisi"
+        app:layout_constraintTop_toTopOf="@id/bg_repetisi" />
+
+    <TextView
+        android:id="@+id/text_repetisi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/repetition_example"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="24sp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/text_satuan_repetisi"
+        app:layout_constraintStart_toStartOf="@id/bg_repetisi" />
+
+    <TextView
+        android:id="@+id/text_satuan_repetisi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/repetisi"
+        android:textSize="14sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/bg_repetisi"
+        app:layout_constraintBottom_toBottomOf="@id/bg_repetisi"
+        android:layout_margin="16dp" />
+
+    <View
+        android:id="@+id/bg_total"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bggreen"
+        app:layout_constraintStart_toEndOf="@id/bg_repetisi"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bg_durasi" />
+
+    <TextView
+        android:id="@+id/title_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total"
+        android:textSize="16sp"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/bg_total"
+        app:layout_constraintTop_toTopOf="@id/bg_total" />
+
+    <TextView
+        android:id="@+id/text_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/repetition_example"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="24sp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/text_satuan_total"
+        app:layout_constraintStart_toStartOf="@id/bg_total" />
+
+    <TextView
+        android:id="@+id/text_satuan_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/latihan"
+        android:textSize="14sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/bg_total"
+        app:layout_constraintBottom_toBottomOf="@id/bg_total"
+        android:layout_margin="16dp" />
+
+    <Button
+        android:id="@+id/btn_simpan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/simpan"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/main_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bg_repetisi"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:padding="20dp"
+        android:layout_marginHorizontal="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#2F2F2F"
+    app:cardCornerRadius="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:contentDescription="@string/image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/default_push_up" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/main_green"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="14sp"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintTop_toTopOf="@id/image"
+            android:text="@string/repetition_example"/>
+
+        <ImageView
+            android:id="@+id/image_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/date_icon"
+            android:src="@drawable/date_icon"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="@id/image_time"
+            app:layout_constraintBottom_toTopOf="@id/image_time" />
+
+        <TextView
+            android:id="@+id/date_text"
+            android:text="@string/date_example"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="14sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/image_date"
+            app:layout_constraintTop_toTopOf="@id/image_date"
+            app:layout_constraintBottom_toBottomOf="@id/image_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_time"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/time_icon"
+            android:src="@drawable/time"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintBottom_toBottomOf="@id/image" />
+
+        <TextView
+            android:id="@+id/time_text"
+            android:text="@string/time_example"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/image_time"
+            app:layout_constraintTop_toTopOf="@id/image_time"
+            app:layout_constraintBottom_toBottomOf="@id/image_time"
+            android:layout_margin="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
