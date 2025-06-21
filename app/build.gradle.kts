@@ -60,4 +60,18 @@ dependencies {
 
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
+
+    implementation(libs.tasks.vision)
+
+    // CameraX core library
+    implementation(libs.androidx.camera.core)
+
+    // CameraX Camera2 extensions
+    implementation(libs.androidx.camera.camera2)
+
+    // CameraX Lifecycle library
+    implementation(libs.androidx.camera.lifecycle)
+
+    // CameraX View class
+    implementation(libs.androidx.camera.view)
 }
