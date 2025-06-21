@@ -1,5 +1,6 @@
 package com.devforge.fitguard.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,5 +12,5 @@ interface UserDao {
     fun insertUser(userEntity: UserEntity)
 
     @Query("SELECT * FROM user ORDER BY userId DESC")
-    fun getUser(): UserEntity
+    fun getUser(): LiveData<UserEntity>
 }
