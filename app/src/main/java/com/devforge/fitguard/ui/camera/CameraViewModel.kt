@@ -1,10 +1,12 @@
 package com.devforge.fitguard.ui.camera
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.devforge.fitguard.data.UserEntity
 import com.devforge.fitguard.data.UserRepository
 import com.devforge.fitguard.utils.PoseLandmarkerHelper
 
-class CameraViewModel(repository: UserRepository) : ViewModel() {
+class CameraViewModel(private val repository: UserRepository) : ViewModel() {
     private var _model = PoseLandmarkerHelper.MODEL_POSE_LANDMARKER_FULL
     private var _delegate: Int = PoseLandmarkerHelper.DELEGATE_CPU
     private var _minPoseDetectionConfidence: Float =
@@ -41,6 +43,8 @@ class CameraViewModel(repository: UserRepository) : ViewModel() {
     fun setMinPosePresenceConfidence(confidence: Float) {
         _minPosePresenceConfidence = confidence
     }
+
+    fun getUser(): LiveData<UserEntity> = repository.getUser()
 
     fun setModel(model: Int) {
         _model = model

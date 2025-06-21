@@ -13,7 +13,7 @@ data class RecordEntity(
     @ColumnInfo(name = "recordId")
     val id: Int = 0,
     @ColumnInfo(name = "calorie")
-    val calorie: Int = 0,
+    val calorie: Float = 0F,
     @ColumnInfo(name = "repetition")
     val repetition: Int = 0,
     @ColumnInfo(name = "totalDuration")
@@ -23,3 +23,9 @@ data class RecordEntity(
     @ColumnInfo(name = "date")
     val date: String? = null
 ) : Parcelable
+
+data class AktivitasLatihan(
+    val jenis: String,
+    val durasiMenit: Int,
+    val repetisi: Int
+)

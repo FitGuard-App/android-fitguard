@@ -1,6 +1,8 @@
 package com.devforge.fitguard.ui.result
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View.GONE
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.devforge.fitguard.R
 import com.devforge.fitguard.data.RecordEntity
 import com.devforge.fitguard.databinding.ActivityResultBinding
+import com.devforge.fitguard.ui.MainActivity
 import com.devforge.fitguard.utils.DateHelper
 import com.devforge.fitguard.utils.UserViewModelFactory
 
@@ -29,10 +32,15 @@ class ResultActivity : AppCompatActivity() {
         val factory = UserViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[ResultViewModel::class.java]
 
-        val kalori = intent.getIntExtra("kalori", 0)
+        val kalori = intent.getFloatExtra("kalori", 0F)
         val durasi = intent.getLongExtra("durasi", 0L)
         val repetisi = intent.getIntExtra("repetisi", 0)
         val total = intent.getIntExtra("total", 0)
+        val from = intent.getStringExtra("from")
+
+        if (from == "history") {
+            binding.btnSimpan.visibility = GONE
+        }
 
         binding.textKalori.text = kalori.toString()
         binding.textDurasi.text = durasi.toString()
@@ -42,7 +50,8 @@ class ResultActivity : AppCompatActivity() {
         binding.btnSimpan.setOnClickListener{
             viewModel.insert(RecordEntity(calorie = kalori, totalDuration = durasi.toInt(), repetition = repetisi, exerciseCount = total, date = DateHelper.getCurrentDate()))
 
-            finish()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }

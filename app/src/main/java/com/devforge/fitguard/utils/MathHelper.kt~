@@ -6,7 +6,6 @@ import kotlin.math.acos
 import kotlin.math.sqrt
 import com.google.mediapipe.tasks.components.containers.NormalizedLandmark
 import kotlin.math.ceil
-import kotlin.time.times
 
 object MathHelper {
     fun calculateAngle(a: Landmark3D, b: Landmark3D, c: Landmark3D): Float {
@@ -51,7 +50,7 @@ object MathHelper {
     }
 
     fun hitungKaloriAktivitas(
-        beratKg: Int?,
+        beratKg: Float,
         aktivitas: AktivitasLatihan
     ): Float {
         val metMap = mapOf(
@@ -64,7 +63,7 @@ object MathHelper {
         val met = metMap[aktivitas.jenis] ?: 6.0
         val durasiJam = aktivitas.durasiMenit / 60.0
 
-        return (met * beratKg!! * durasiJam).toFloat()
+        return (met * beratKg * durasiJam).toFloat()
     }
 
     fun hitungTotalKalori(
@@ -73,7 +72,7 @@ object MathHelper {
     ): Float {
         var totalKalori = 0f
         for (aktivitas in aktivitasList) {
-            totalKalori += hitungKaloriAktivitas(beratKg, aktivitas)
+            totalKalori += hitungKaloriAktivitas(beratKg!!, aktivitas)
         }
         return totalKalori
     }

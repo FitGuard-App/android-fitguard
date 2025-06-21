@@ -30,4 +30,10 @@ object DateHelper {
         val remainingSeconds = seconds % 60
         return String.format("%02d:%02d", minutes, remainingSeconds)
     }
+
+    fun getCurrentTime(): String {
+        val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        val time = Date()
+        return timeFormat.format(time)
+    }
 }

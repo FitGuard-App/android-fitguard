@@ -70,7 +70,7 @@ class DashboardFragment : Fragment() {
         val dateFormatted = DateHelper.formatDateToIndo(thisDay)
 
         dashboardViewModel.getAllRecords().observe(requireActivity()) { record ->
-            val calorieToday = record.filter { it.date == dateFormatted }.sumOf { it.calorie.toInt() }
+            val calorieToday = record.filter { it.date == dateFormatted }.sumOf { it.calorie }
             binding.cardCalorie.cardValue.text = calorieToday.toString()
         }
     }

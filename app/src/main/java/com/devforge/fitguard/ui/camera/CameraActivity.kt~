@@ -19,10 +19,14 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.devforge.fitguard.data.AktivitasLatihan
+import com.devforge.fitguard.data.UserEntity
 import com.devforge.fitguard.databinding.ActivityCameraBinding
 import com.devforge.fitguard.ui.result.ResultActivity
 import com.devforge.fitguard.utils.ClassifyHelper
 import com.devforge.fitguard.utils.FormAnalyzerHelper
+import com.devforge.fitguard.utils.MathHelper.estimasiDurasi
+import com.devforge.fitguard.utils.MathHelper.hitungTotalKalori
 import com.devforge.fitguard.utils.MathHelper.processPose
 import com.devforge.fitguard.utils.PoseLandmarkerHelper
 import com.devforge.fitguard.utils.RepetitionCounter
@@ -48,6 +52,8 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
     private var camera: Camera? = null
     private var cameraProvider: ProcessCameraProvider? = null
     private var cameraFacing = CameraSelector.LENS_FACING_FRONT
+
+    private var userData : UserEntity? = null
 
     private var startTime: Long = 0
 
@@ -109,6 +115,10 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
         binding.viewFinder.post {
             // Set up the camera and its use cases
             setUpCamera()
+        }
+
+        viewModel.getUser().observe(this) {
+            userData = it
         }
 
         // Create the PoseLandmarkerHelper that will handle the inference
@@ -257,7 +267,14 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                     }
                 }
 
-                val text = poseAnalyzer.runModel(inputForModel, prediction, repetitionCounters[prediction]?.count ?: 0, "Pemula")
+                val level = userData?.level
+
+                val text = poseAnalyzer.runModel(
+                    inputForModel,
+                    prediction,
+                    repetitionCounters[prediction]?.count ?: 0,
+                    level.toString()
+                )
 
                 binding.textRepetition.text = repetitionCounters[prediction]?.count.toString()
                 binding.textDuration.text = getDurationFormatted()
@@ -272,14 +289,26 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                         ResultActivity::class.java
                     )
 
-                    Log.d("durasi", getDurationInSeconds().toString())
+                    val berat = userData?.bodyWeight
 
-                    intent.putExtra("kalori", 2)
+                    val aktivitasSesi = listOf(
+                        AktivitasLatihan("Push-Up", durasiMenit = estimasiDurasi("Push-Up", repetitionCounters["Push-Up"]?.count ?: 0), repetisi = repetitionCounters["Push-Up"]?.count ?: 0),
+                        AktivitasLatihan("Sit-Up", durasiMenit = estimasiDurasi("Sit-Up", repetitionCounters["Sit-Up"]?.count ?: 0), repetisi = repetitionCounters["Sit-Up"]?.count ?: 0),
+                        AktivitasLatihan("Squat", durasiMenit = estimasiDurasi("Squat", repetitionCounters["Squat"]?.count ?: 0), repetisi = repetitionCounters["Squat"]?.count ?: 0),
+                    )
+
+                    val totalKalori = hitungTotalKalori(berat, aktivitasSesi)
+
+                    Log.d("Total Kalori", totalKalori.toString())
+
+                    intent.putExtra("kalori", totalKalori)
                     intent.putExtra("durasi", getDurationInSeconds())
                     intent.putExtra("repetisi", totalRepetisi)
                     intent.putExtra("total", totalOlahraga)
+                    intent.putExtra("from", "camera")
 
                     startActivity(intent)
+                    finish()
                 }
             }
         }
