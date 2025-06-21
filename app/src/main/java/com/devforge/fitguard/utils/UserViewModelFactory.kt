@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.devforge.fitguard.data.UserRepository
 import com.devforge.fitguard.ui.camera.CameraViewModel
+import com.devforge.fitguard.ui.dashboard.DashboardViewModel
 import com.devforge.fitguard.ui.result.ResultViewModel
 import com.devforge.fitguard.ui.splashscreen.StartViewModel
 
@@ -18,6 +19,8 @@ class UserViewModelFactory(private val repository: UserRepository): ViewModelPro
             return CameraViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(ResultViewModel::class.java)) {
             return ResultViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(DashboardViewModel::class.java)) {
+            return DashboardViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
