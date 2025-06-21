@@ -59,7 +59,7 @@ class FormAnalyzerHelper {
                 }
             }
         }
-
+        
         if(message == null) {
             message = "Tidak ada kesalahan"
         }
