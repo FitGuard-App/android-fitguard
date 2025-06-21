@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:text="1. Berdiri sekitar 2 meter dari kamera.\n2. Pastikan kepala hingga kaki terlihat.\n3. Hindari cahaya belakang yang terlalu terang.\n4. Siap mulai? Lakukan gerakan sesuai instruksi.\n"
         android:textSize="12sp"
+        android:layout_marginStart="16dp"
         android:textColor="@color/main_white"
         app:layout_constraintStart_toStartOf="@id/tv_title_instruksi"
         app:layout_constraintTop_toBottomOf="@id/tv_title_instruksi"/>
