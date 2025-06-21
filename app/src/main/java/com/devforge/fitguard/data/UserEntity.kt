@@ -23,3 +23,7 @@ data class UserEntity(
     val level: String? = null
     )
 
+data class Landmark3D(
+    val x: Float, val y: Float, val z: Float
+)
+

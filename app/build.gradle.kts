@@ -36,6 +36,11 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        mlModelBinding = true
+    }
+
+    aaptOptions {
+        noCompress("tflite")
     }
 }
 
@@ -60,4 +65,24 @@ dependencies {
 
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
+
+    implementation(libs.tasks.vision)
+
+    // CameraX core library
+    implementation(libs.androidx.camera.core)
+
+    // CameraX Camera2 extensions
+    implementation(libs.androidx.camera.camera2)
+
+    // CameraX Lifecycle library
+    implementation(libs.androidx.camera.lifecycle)
+
+    // CameraX View class
+    implementation(libs.androidx.camera.view)
+
+    // Tensorflow
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.select.tf.ops)
 }
