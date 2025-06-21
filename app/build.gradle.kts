@@ -87,4 +87,6 @@ dependencies {
     implementation(libs.tensorflow.lite.metadata)
     implementation(libs.tensorflow.lite)
     implementation(libs.tensorflow.lite.select.tf.ops)
+
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
