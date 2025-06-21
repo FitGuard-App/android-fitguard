@@ -12,7 +12,7 @@ data class UserEntity(
     @ColumnInfo(name = "name")
      val name: String? = null,
     @ColumnInfo(name = "age")
-     val birthDate: Int = 0,
+     val birthDate: String? = null,
     @ColumnInfo(name = "gender")
      val gender: String? = null,
     @ColumnInfo(name = "bodyWeight")
