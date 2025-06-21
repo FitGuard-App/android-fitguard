@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.devforge.fitguard.R
 import com.devforge.fitguard.databinding.FragmentDashboardBinding
+import com.devforge.fitguard.utils.DateHelper
 import com.devforge.fitguard.utils.UserViewModelFactory
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -26,8 +27,10 @@ class DashboardFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    val dashboardViewModel by viewModels<DashboardViewModel> { UserViewModelFactory.getInstance(requireContext()) }
+    private val dashboardViewModel by viewModels<DashboardViewModel> { UserViewModelFactory.getInstance(requireContext()) }
 
+
+    private val tipsList = listOf("")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +53,28 @@ class DashboardFragment : Fragment() {
             binding.tvHello.text = string
         }
         populateChart()
+        loadCalorieData()
+    }
+
+    private fun loadCalorieData() {
+        val thisDay = DateHelper.getCurrentDate()
+        val dateFormatted = DateHelper.formatDateToIndo(thisDay)
+
+        dashboardViewModel.getAllRecords().observe(requireActivity()) {
+            for (i in it) {
+                if (i.date == dateFormatted) {
+                    binding.cardCalorie.cardValue.text = it[0].calorie.toString()
+                } else {
+                    binding.cardCalorie.cardValue.text = "0"
+                }
+
+            }
+        }
+    }
+
+    private fun loadTipsData() {
+        binding.cardTips.cardTitle.text = "💡Tips"
+
     }
 
     private fun populateChart() {

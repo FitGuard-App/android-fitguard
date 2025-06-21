@@ -40,6 +40,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <include
+        android:id="@+id/card_calorie"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        layout="@layout/card_dashboard"
+        app:layout_constraintTop_toBottomOf="@id/card_chart"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <include
+        android:id="@+id/card_time"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        layout="@layout/card_dashboard"
+        app:layout_constraintTop_toBottomOf="@id/card_chart"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <include
+        android:id="@+id/card_tips"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        layout="@layout/card_dashboard"
+        app:layout_constraintTop_toBottomOf="@id/card_calorie"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
