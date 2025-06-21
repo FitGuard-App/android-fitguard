@@ -55,5 +55,11 @@
     <string name="time_example">00:00</string>
     <string name="end_record">End Record</string>
     <string name="setting">Setting</string>
-    <string name="halo">Halo, %1$s 👋\nSiap latihan hari ini?</string>
+    <string name="text_result">Latihan Selesai 🎉 \nKerja bagus!</string>
+    <string name="example_ringkas">Berikut ringkasan latihanmu</string>
+    <string name="simpan">Simpan</string>
+    <string name="kalori">Kalori</string>
+    <string name="detik">Detik</string>
+    <string name="total">Total Latihan</string>
+    <string name="latihan">Latihan</string>
 </resources>

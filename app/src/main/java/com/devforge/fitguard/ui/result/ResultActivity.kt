@@ -26,5 +26,20 @@ class ResultActivity : AppCompatActivity() {
 
         val factory = UserViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[ResultViewModel::class.java]
+
+        val kalori = intent.getIntExtra("kalori", 0)
+        val durasi = intent.getLongExtra("durasi", 0L)
+        val repetisi = intent.getIntExtra("repetisi", 0)
+        val total = intent.getIntExtra("total", 0)
+
+        binding.textKalori.text = kalori.toString()
+        binding.textDurasi.text = durasi.toString()
+        binding.textRepetisi.text = repetisi.toString()
+        binding.textTotal.text = total.toString()
+
+        binding.btnSimpan.setOnClickListener{
+            viewModel.insert(kalori, durasi, repetisi, total)
+            finish()
+        }
     }
 }

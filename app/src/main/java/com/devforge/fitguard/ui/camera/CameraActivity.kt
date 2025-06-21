@@ -111,15 +111,6 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
             setUpCamera()
         }
 
-        binding.endRecord.setOnClickListener{
-            val intent = Intent(
-                this,
-                ResultActivity::class.java
-            )
-
-            startActivity(intent)
-        }
-
         // Create the PoseLandmarkerHelper that will handle the inference
         backgroundExecutor.execute {
             poseLandmarkerHelper = PoseLandmarkerHelper(
@@ -266,11 +257,30 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                     }
                 }
 
-                val text = poseAnalyzer.runModel(inputForModel, prediction, repetitionCounters[prediction]?.count ?: 0, "pemula")
+                val text = poseAnalyzer.runModel(inputForModel, prediction, repetitionCounters[prediction]?.count ?: 0, "Pemula")
 
                 binding.textRepetition.text = repetitionCounters[prediction]?.count.toString()
                 binding.textDuration.text = getDurationFormatted()
                 binding.textCorrection.text = text
+
+                binding.endRecord.setOnClickListener{
+                    val totalRepetisi = repetitionCounters.values.sumOf { it.count }
+                    val totalOlahraga = repetitionCounters.values.count { it.count > 0 }
+
+                    val intent = Intent(
+                        this,
+                        ResultActivity::class.java
+                    )
+
+                    Log.d("durasi", getDurationInSeconds().toString())
+
+                    intent.putExtra("kalori", 2)
+                    intent.putExtra("durasi", getDurationInSeconds())
+                    intent.putExtra("repetisi", totalRepetisi)
+                    intent.putExtra("total", totalOlahraga)
+
+                    startActivity(intent)
+                }
             }
         }
     }
