@@ -75,7 +75,7 @@ class DashboardFragment : Fragment() {
                 it.date?.let { date ->
                     DateHelper.formatDateToIndo(date)
                 } == todayString
-            }.sumOf { it.calorie }
+            }.sumOf { it.calorie.toInt() }
 
             Log.d("Calorie", calorieToday.toString())
             binding.cardCalorie.cardValue.text = calorieToday.toString()

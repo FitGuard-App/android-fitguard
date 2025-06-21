@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -19,15 +20,20 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.devforge.fitguard.data.AktivitasLatihan
+import com.devforge.fitguard.data.UserEntity
 import com.devforge.fitguard.databinding.ActivityCameraBinding
 import com.devforge.fitguard.ui.result.ResultActivity
 import com.devforge.fitguard.utils.ClassifyHelper
 import com.devforge.fitguard.utils.FormAnalyzerHelper
+import com.devforge.fitguard.utils.MathHelper.estimasiDurasi
+import com.devforge.fitguard.utils.MathHelper.hitungTotalKalori
 import com.devforge.fitguard.utils.MathHelper.processPose
 import com.devforge.fitguard.utils.PoseLandmarkerHelper
 import com.devforge.fitguard.utils.RepetitionCounter
 import com.devforge.fitguard.utils.UserViewModelFactory
 import com.google.mediapipe.tasks.vision.core.RunningMode
+import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -49,7 +55,11 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
     private var cameraProvider: ProcessCameraProvider? = null
     private var cameraFacing = CameraSelector.LENS_FACING_FRONT
 
+    private var userData : UserEntity? = null
+
     private var startTime: Long = 0
+
+    private lateinit var tts: TextToSpeech
 
     var poseAnalyzer = FormAnalyzerHelper()
 
@@ -79,7 +89,7 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
     private val repetitionCounters = mapOf(
         "Push-Up" to RepetitionCounter("Push-Up", thresholdDown = 70f, thresholdUp = 160f),
         "Sit-Up" to RepetitionCounter("Sit-Up", thresholdDown = 60f, thresholdUp = 130f),
-        "Squat" to RepetitionCounter("Squat", thresholdDown = 70f, thresholdUp = 160f)
+        "Squat" to RepetitionCounter("Squat", thresholdDown = 90f, thresholdUp = 160f)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,6 +112,17 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        tts = TextToSpeech(this) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val result = tts.setLanguage(Locale("id", "ID"))
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(this, "Bahasa tidak didukung", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Bahasa berhasil dipilih", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         // Initialize our background executor
         backgroundExecutor = Executors.newSingleThreadExecutor()
 
@@ -109,6 +130,10 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
         binding.viewFinder.post {
             // Set up the camera and its use cases
             setUpCamera()
+        }
+
+        viewModel.getUser().observe(this) {
+            userData = it
         }
 
         // Create the PoseLandmarkerHelper that will handle the inference
@@ -123,6 +148,10 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                 poseLandmarkerHelperListener = this
             )
         }
+    }
+
+    private fun speak(text: String) {
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
     // Initialize CameraX, and prepare to bind the camera use cases
@@ -257,11 +286,36 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                     }
                 }
 
-                val text = poseAnalyzer.runModel(inputForModel, prediction, repetitionCounters[prediction]?.count ?: 0, "Pemula")
+                val level = userData?.level
+
+                val text = poseAnalyzer.runModel(
+                    inputForModel,
+                    prediction,
+                    repetitionCounters[prediction]?.count ?: 0,
+                    level.toString()
+                )
+
+                if(text != "Tidak ada kesalahan") {
+                    if (text != null) {
+                        speak(text)
+                    }
+                }
 
                 binding.textRepetition.text = repetitionCounters[prediction]?.count.toString()
                 binding.textDuration.text = getDurationFormatted()
                 binding.textCorrection.text = text
+
+                val berat = userData?.bodyWeight
+
+                val aktivitasSesi = listOf(
+                    AktivitasLatihan("Push-Up", durasiMenit = estimasiDurasi("Push-Up", repetitionCounters["Push-Up"]?.count ?: 0), repetisi = repetitionCounters["Push-Up"]?.count ?: 0),
+                    AktivitasLatihan("Sit-Up", durasiMenit = estimasiDurasi("Sit-Up", repetitionCounters["Sit-Up"]?.count ?: 0), repetisi = repetitionCounters["Sit-Up"]?.count ?: 0),
+                    AktivitasLatihan("Squat", durasiMenit = estimasiDurasi("Squat", repetitionCounters["Squat"]?.count ?: 0), repetisi = repetitionCounters["Squat"]?.count ?: 0),
+                )
+
+                val totalKalori = hitungTotalKalori(berat, aktivitasSesi)
+
+                Log.d("Total Kalori", totalKalori.toString())
 
                 binding.endRecord.setOnClickListener{
                     val totalRepetisi = repetitionCounters.values.sumOf { it.count }
@@ -272,12 +326,11 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                         ResultActivity::class.java
                     )
 
-                    Log.d("durasi", getDurationInSeconds().toString())
-
-                    intent.putExtra("kalori", 2)
+                    intent.putExtra("kalori", totalKalori)
                     intent.putExtra("durasi", getDurationInSeconds())
                     intent.putExtra("repetisi", totalRepetisi)
                     intent.putExtra("total", totalOlahraga)
+                    intent.putExtra("from", "camera")
 
                     startActivity(intent)
                     finish()
@@ -314,6 +367,8 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
 
     override fun onDestroy() {
         super.onDestroy()
+        tts.stop()
+        tts.shutdown()
 
         // Shut down our background executor
         backgroundExecutor.shutdown()

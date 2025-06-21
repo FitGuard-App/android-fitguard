@@ -2,6 +2,7 @@ package com.devforge.fitguard.ui.result
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View.GONE
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -31,10 +32,16 @@ class ResultActivity : AppCompatActivity() {
         val factory = UserViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[ResultViewModel::class.java]
 
-        val kalori = intent.getIntExtra("kalori", 0)
-        val durasi = intent.getLongExtra("durasi", 0L)
+        val kalori = intent.getFloatExtra("kalori", 0F)
+        var durasi = intent.getLongExtra("durasi", 0L)
         val repetisi = intent.getIntExtra("repetisi", 0)
         val total = intent.getIntExtra("total", 0)
+        val from = intent.getStringExtra("from")
+
+        if (from == "history") {
+            binding.btnSimpan.visibility = GONE
+            durasi = intent.getIntExtra("durasi", 0).toLong()
+        }
 
         binding.textKalori.text = kalori.toString()
         binding.textDurasi.text = durasi.toString()

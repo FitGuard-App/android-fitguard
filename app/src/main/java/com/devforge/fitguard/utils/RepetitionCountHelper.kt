@@ -10,11 +10,11 @@ class RepetitionCounter(
         private set
 
     fun update(angleleft: Float, angleright: Float) {
-        if (!isDown && angleleft < thresholdDown && angleright < thresholdDown) {
+        if (!isDown && angleright < thresholdDown) {
             isDown = true
         }
 
-        if (isDown && angleleft > thresholdUp && angleright > thresholdUp) {
+        if (isDown && angleright > thresholdUp) {
             count++
             isDown = false
         }

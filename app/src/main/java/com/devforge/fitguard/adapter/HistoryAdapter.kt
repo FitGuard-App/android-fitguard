@@ -36,6 +36,12 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ActivityViewHolder>()
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ResultActivity::class.java)
 
+            intent.putExtra("kalori", item.calorie)
+            intent.putExtra("durasi", item.totalDuration)
+            intent.putExtra("repetisi", item.repetition)
+            intent.putExtra("total", item.exerciseCount)
+            intent.putExtra("from", "history")
+
             it.context.startActivity(intent)
         }
     }
