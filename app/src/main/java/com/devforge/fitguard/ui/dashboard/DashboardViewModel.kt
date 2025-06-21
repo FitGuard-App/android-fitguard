@@ -1,7 +1,6 @@
 package com.devforge.fitguard.ui.dashboard
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.devforge.fitguard.data.RecordEntity
 import com.devforge.fitguard.data.UserEntity
