@@ -2,6 +2,7 @@ package com.devforge.fitguard.ui.result
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devforge.fitguard.data.RecordEntity
 import com.devforge.fitguard.data.UserEntity
 import com.devforge.fitguard.data.UserRepository
 import kotlinx.coroutines.launch
