@@ -26,11 +26,7 @@ class LevelFillActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityLevelFillBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
         supportActionBar?.hide()
 
 
@@ -40,23 +36,21 @@ class LevelFillActivity : AppCompatActivity() {
         val weight = intent.getIntExtra(DataFillActivity.DATA_WEIGHT, 0)
         val height = intent.getIntExtra(DataFillActivity.DATA_HEIGHT, 0)
         binding.genderToggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
-            if (isChecked) {
-                when (checkedId) {
-                    binding.btnBeginner.id -> {
-                        level = "Pemula"
-                    }
-
-                    binding.btnIntermediate.id -> {
-                        level = "Menengah"
-                    }
-
-                    binding.btnAdvanced.id -> {
-                        level = "Lanjutan"
-                    }
-                }
+            level = when (checkedId) {
+                binding.btnBeginner.id -> if (isChecked) "Pemula" else null
+                binding.btnIntermediate.id -> if (isChecked) "Menengah" else null
+                binding.btnAdvanced.id -> if (isChecked) "Lanjutan" else null
+                else -> null
             }
+            binding.btnSubmit.isEnabled = !level.isNullOrBlank()
         }
 
+
+        binding.btnBack.setOnClickListener {
+            startActivity(Intent(this, DataFillActivity::class.java))
+            level = null
+
+        }
 
         binding.btnSubmit.setOnClickListener {
             viewModel.insert(
