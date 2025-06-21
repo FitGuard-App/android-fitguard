@@ -1,10 +1,10 @@
-package com.devforge.fitguard.ui.home
+package com.devforge.fitguard.ui.guardian
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class GuardianViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
