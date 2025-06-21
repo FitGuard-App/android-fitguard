@@ -11,6 +11,18 @@ class UserRepository(private val userDao: UserDao) {
         return userDao.getUser()
     }
 
+    suspend fun updateUser(userEntity: UserEntity) {
+        userDao.updateUser(userEntity)
+    }
+
+    suspend fun insertRecord(recordEntity: RecordEntity) {
+        userDao.insertRecord(recordEntity)
+    }
+
+    fun getAllRecords(): LiveData<List<RecordEntity>> {
+        return userDao.getAllRecords()
+    }
+
 
     companion object {
         @Volatile

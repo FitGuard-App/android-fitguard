@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.devforge.fitguard.R
 import com.devforge.fitguard.databinding.FragmentDashboardBinding
+import com.devforge.fitguard.utils.UserViewModelFactory
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -24,13 +26,14 @@ class DashboardFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    val dashboardViewModel by viewModels<DashboardViewModel> { UserViewModelFactory.getInstance(requireContext()) }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -41,6 +44,15 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        dashboardViewModel.getUser().observe(requireActivity()) {
+            val string = String.format(resources.getString(R.string.halo), it.name)
+            binding.tvHello.text = string
+        }
+        populateChart()
+    }
+
+    private fun populateChart() {
         val defaultEntries = listOf(
             BarEntry(0f, 12f),
             BarEntry(1f, 12f),
@@ -50,7 +62,7 @@ class DashboardFragment : Fragment() {
             BarEntry(5f,16f),
             BarEntry(6f,17f),
             BarEntry(7f,18f),
-            )
+        )
 
         val data = BarDataSet(defaultEntries, "Progress").apply {
             color = resources.getColor(R.color.main_green)
@@ -76,7 +88,6 @@ class DashboardFragment : Fragment() {
         binding.cardChart.barChart.legend.isEnabled = false
 
         binding.cardChart.barChart.invalidate()
-
     }
 
     override fun onDestroyView() {

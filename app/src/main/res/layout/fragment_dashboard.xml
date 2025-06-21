@@ -10,7 +10,7 @@
         android:id="@+id/tv_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Halo, %s 👋\nSiap latihan hari ini?"
+        android:text="@string/halo"
         android:textSize="24sp"
         android:textColor="@color/main_white"
         android:textStyle="bold"
@@ -39,5 +39,7 @@
         android:layout_marginHorizontal="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
