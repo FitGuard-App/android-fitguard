@@ -46,7 +46,7 @@
     <androidx.camera.view.PreviewView
         android:id="@+id/view_finder"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="300dp"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
     <com.devforge.fitguard.customView.OverlayView
         android:id="@+id/overlay"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="300dp"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="@id/view_finder"
         app:layout_constraintStart_toStartOf="@id/view_finder"
@@ -171,5 +171,16 @@
         app:layout_constraintTop_toBottomOf="@id/duration_title"
         app:layout_constraintStart_toStartOf="@id/toolbar_duration"
         app:layout_constraintEnd_toEndOf="@id/toolbar_duration" />
+
+    <ImageView
+        android:id="@+id/end_record"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/end_record"
+        android:src="@drawable/end_record"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_repetition" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

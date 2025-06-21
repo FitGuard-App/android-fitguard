@@ -15,7 +15,7 @@
         android:background="@drawable/bgwhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -171,5 +171,16 @@
         app:layout_constraintTop_toBottomOf="@id/duration_title"
         app:layout_constraintStart_toStartOf="@id/toolbar_duration"
         app:layout_constraintEnd_toEndOf="@id/toolbar_duration" />
+
+    <ImageView
+        android:id="@+id/end_record"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/end_record"
+        android:src="@drawable/end_record"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_repetition" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

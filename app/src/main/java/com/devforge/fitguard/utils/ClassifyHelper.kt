@@ -47,7 +47,7 @@ class ClassifyHelper (context: Context) {
     }
 
     companion object {
-        const val NUM_CLASSES = 4
+        const val NUM_CLASSES = 3
         val categories = listOf("Push-Up", "Sit-Up", "Squat")
     }
 }
