@@ -1,25 +1,22 @@
-package com.devforge.fitguard.ui.splashscreen
+package com.devforge.fitguard.ui.datafill
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.devforge.fitguard.R
-import com.devforge.fitguard.ui.welcome.WelcomeActivity
-import com.devforge.fitguard.utils.UserViewModelFactory
+import com.devforge.fitguard.databinding.ActivityDataFillBinding
+import com.devforge.fitguard.databinding.ActivityWelcomeBinding
 
-@SuppressLint("CustomSplashScreen")
-class SplashScreenActivity : AppCompatActivity() {
+class DataFillActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDataFillBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_splash_screen)
+
+        binding = ActivityDataFillBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -27,11 +24,9 @@ class SplashScreenActivity : AppCompatActivity() {
         }
 
         supportActionBar?.hide()
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, WelcomeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 3000)
-    }
 
+//        binding.btnStart.setOnClickListener {
+//            navigateUser()
+//        }
+    }
 }

@@ -1,11 +1,13 @@
 package com.devforge.fitguard.data
 
+import androidx.lifecycle.LiveData
+
 class UserRepository(private val userDao: UserDao) {
     fun insertUser(userEntity: UserEntity) {
         userDao.insertUser(userEntity)
     }
 
-    fun getUser(): UserEntity {
+    fun getUser(): LiveData<UserEntity> {
         return userDao.getUser()
     }
 
