@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.devforge.fitguard.R
 import com.devforge.fitguard.data.RecordEntity
 import com.devforge.fitguard.databinding.ActivityResultBinding
+import com.devforge.fitguard.utils.DateHelper
 import com.devforge.fitguard.utils.UserViewModelFactory
 
 class ResultActivity : AppCompatActivity() {
@@ -39,7 +40,8 @@ class ResultActivity : AppCompatActivity() {
         binding.textTotal.text = total.toString()
 
         binding.btnSimpan.setOnClickListener{
-            viewModel.insert(RecordEntity(calorie = kalori, durasi, repetisi, total))
+            viewModel.insert(RecordEntity(calorie = kalori, totalDuration = durasi.toInt(), repetition = repetisi, exerciseCount = total, date = DateHelper.getCurrentDate()))
+
             finish()
         }
     }

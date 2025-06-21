@@ -62,4 +62,8 @@
     <string name="detik">Detik</string>
     <string name="total">Total Latihan</string>
     <string name="latihan">Latihan</string>
+    <string name="halo">Halo, %1$s 👋\nSiap latihan hari ini?</string>
+    <string name="history_record">History Record</string>
+    <string name="image">image</string>
+    <string name="date_example">Rabu, 32 Februari 2025</string>
 </resources>

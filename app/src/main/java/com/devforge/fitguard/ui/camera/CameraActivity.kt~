@@ -280,7 +280,6 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                     intent.putExtra("total", totalOlahraga)
 
                     startActivity(intent)
-                    finish()
                 }
             }
         }
