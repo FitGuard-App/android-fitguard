@@ -1,5 +1,6 @@
 package com.devforge.fitguard.ui.dashboard
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.devforge.fitguard.R
 import com.devforge.fitguard.databinding.FragmentDashboardBinding
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
 class DashboardFragment : Fragment() {
 
@@ -26,15 +35,47 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val defaultEntries = listOf(
+            BarEntry(0f, 12f),
+            BarEntry(1f, 12f),
+            BarEntry(2f,13f),
+            BarEntry(3f,14f),
+            BarEntry(4f,15f),
+            BarEntry(5f,16f),
+            BarEntry(6f,17f),
+            BarEntry(7f,18f),
+            )
+
+        val data = BarDataSet(defaultEntries, "Progress").apply {
+            color = resources.getColor(R.color.main_green)
+
+        }
+
+        binding.cardChart.barChart.data = BarData(data)
+
+        val days = arrayOf("Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu")
+        binding.cardChart.barChart.xAxis.apply {
+            valueFormatter = IndexAxisValueFormatter(days)
+            position = XAxis.XAxisPosition.BOTTOM
+            textColor = resources.getColor(R.color.main_black)
+        }
+
+        binding.cardChart.barChart.axisLeft.apply {
+            textColor = resources.getColor(R.color.main_black)
+        }
+
+        data.valueTextColor = resources.getColor(R.color.main_black)
+        binding.cardChart.barChart.axisRight.isEnabled = false
+        binding.cardChart.barChart.description.isEnabled = false
+        binding.cardChart.barChart.legend.isEnabled = false
+
+        binding.cardChart.barChart.invalidate()
 
     }
 
