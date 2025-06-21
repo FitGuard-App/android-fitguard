@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="8dp"
     android:background="@color/main_black"
     tools:context=".ui.datafill.DataFillActivity">
 
@@ -72,13 +73,12 @@
             android:id="@+id/input_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeWidth="0dp"
-            
-            android:paddingBottom="16dp"
             android:inputType="textPersonName"
+            android:paddingBottom="16dp"
             android:shadowColor="@color/main_black"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            app:boxBackgroundMode="filled"
+            app:boxStrokeWidth="1dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -100,6 +100,8 @@
         android:layout_height="wrap_content"
         android:background="@color/main_black"
         android:paddingHorizontal="16dp"
+        app:boxBackgroundMode="filled"
+        app:boxStrokeWidth="1dp"
         android:textColor="@color/main_white"
         app:startIconDrawable="@drawable/outline_account_circle_24"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,11 +110,12 @@
             android:id="@+id/input_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_white"
+            android:inputType="date"
             android:paddingBottom="16dp"
-            android:inputType="textPersonName"
             android:shadowColor="@color/main_black"
-            android:textSize="16sp">
+            android:textSize="16sp"
+            app:boxBackgroundMode="filled"
+            app:boxStrokeWidth="1dp" >
         </com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -145,6 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             app:icon="@drawable/outline_account_circle_24"
+            style="@style/GenderToggleButton"
             app:iconGravity="textStart"
             android:text="Pria" />
 
@@ -152,6 +156,7 @@
             android:id="@+id/btn_female"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
+            style="@style/GenderToggleButton"
             app:icon="@drawable/outline_account_circle_24"
             app:iconGravity="textStart"
             android:text="Wanita" />
@@ -197,11 +202,12 @@
             android:id="@+id/input_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_white"
-            android:paddingBottom="16dp"
             android:inputType="number"
+            android:paddingBottom="16dp"
             android:shadowColor="@color/main_black"
-            android:textSize="16sp">
+            android:textSize="16sp"
+            app:boxBackgroundMode="filled"
+            app:boxStrokeWidth="1dp" >
         </com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -220,11 +226,12 @@
             android:id="@+id/input_height"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_white"
-            android:paddingBottom="16dp"
             android:inputType="number"
+            android:paddingBottom="16dp"
             android:shadowColor="@color/main_black"
-            android:textSize="16sp">
+            android:textSize="16sp"
+            app:boxBackgroundMode="filled"
+            app:boxStrokeWidth="1dp" >
         </com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -237,6 +244,7 @@
         android:layout_marginBottom="24dp"
         android:layout_marginHorizontal="16dp"
         android:textColor="@color/white"
+
         android:backgroundTint="@color/main_green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

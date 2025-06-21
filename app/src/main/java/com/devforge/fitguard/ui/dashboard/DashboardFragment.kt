@@ -25,9 +25,6 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 
 class DashboardFragment : Fragment() {
 
-    private var entries : List<BarEntry> = listOf()
-    private val days = arrayOf("Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu")
-
 
     private var _binding: FragmentDashboardBinding? = null
 
