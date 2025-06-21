@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="118dp"
+        android:layout_marginTop="84dp"
         android:text="Yuk, Lengkapi Datamu"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -103,7 +103,7 @@
         app:boxBackgroundMode="filled"
         app:boxStrokeWidth="1dp"
         android:textColor="@color/main_white"
-        app:startIconDrawable="@drawable/outline_account_circle_24"
+        app:startIconDrawable="@drawable/date_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_date">
         <com.google.android.material.textfield.TextInputEditText
@@ -147,7 +147,7 @@
             android:id="@+id/btn_male"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
-            app:icon="@drawable/outline_account_circle_24"
+            app:icon="@drawable/man_icon_white"
             style="@style/GenderToggleButton"
             app:iconGravity="textStart"
             android:text="Pria" />
@@ -157,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             style="@style/GenderToggleButton"
-            app:icon="@drawable/outline_account_circle_24"
+            app:icon="@drawable/woman_icon_white"
             app:iconGravity="textStart"
             android:text="Wanita" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -195,7 +195,7 @@
         android:background="@color/main_black"
         android:paddingHorizontal="16dp"
         android:textColor="@color/main_white"
-        app:startIconDrawable="@drawable/outline_account_circle_24"
+        app:startIconDrawable="@drawable/weight_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_weight">
         <com.google.android.material.textfield.TextInputEditText
@@ -219,7 +219,7 @@
         android:background="@color/main_black"
         android:paddingHorizontal="16dp"
         android:textColor="@color/main_white"
-        app:startIconDrawable="@drawable/outline_account_circle_24"
+        app:startIconDrawable="@drawable/height_icon"
         app:layout_constraintStart_toEndOf="@id/layout_input_weight"
         app:layout_constraintTop_toBottomOf="@id/tv_weight">
         <com.google.android.material.textfield.TextInputEditText
