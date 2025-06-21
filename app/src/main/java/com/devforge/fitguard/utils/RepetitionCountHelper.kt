@@ -9,19 +9,14 @@ class RepetitionCounter(
     var count = 0
         private set
 
-    fun update(angle: Float) {
-        if (!isDown && angle < thresholdDown) {
+    fun update(angleleft: Float, angleright: Float) {
+        if (!isDown && angleleft < thresholdDown && angleright < thresholdDown) {
             isDown = true
         }
 
-        if (isDown && angle > thresholdUp) {
+        if (isDown && angleleft > thresholdUp && angleright > thresholdUp) {
             count++
             isDown = false
         }
-    }
-
-    fun reset() {
-        isDown = false
-        count = 0
     }
 }

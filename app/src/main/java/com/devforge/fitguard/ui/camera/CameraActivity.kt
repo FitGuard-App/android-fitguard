@@ -1,6 +1,7 @@
 package com.devforge.fitguard.ui.camera
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
@@ -19,6 +20,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.devforge.fitguard.databinding.ActivityCameraBinding
+import com.devforge.fitguard.ui.result.ResultActivity
 import com.devforge.fitguard.utils.ClassifyHelper
 import com.devforge.fitguard.utils.MathHelper.processPose
 import com.devforge.fitguard.utils.PoseLandmarkerHelper
@@ -107,7 +109,12 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
         }
 
         binding.endRecord.setOnClickListener{
-            finish()
+            val intent = Intent(
+                this,
+                ResultActivity::class.java
+            )
+
+            startActivity(intent)
         }
 
         // Create the PoseLandmarkerHelper that will handle the inference
@@ -236,19 +243,28 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
                     }
                 }
 
-                val mainAngle = when (prediction) {
+                val rightAngle = when (prediction) {
                     "Push-Up" -> inputForModel[7]
                     "Sit-Up" -> inputForModel[9]
-                    "Squat" -> inputForModel[11]
+                    "Squat" -> inputForModel[10]
                     else -> null
                 }
 
-                mainAngle?.let {
-                    repetitionCounters[prediction]?.update(it)
+                val leftAngle = when (prediction) {
+                    "Push-Up" -> inputForModel[1]
+                    "Sit-Up" -> inputForModel[3]
+                    "Squat" -> inputForModel[4]
+                    else -> null
+                }
+
+                rightAngle?.let { right ->
+                    leftAngle?.let { left ->
+                        repetitionCounters[prediction]?.update(right, left)
+                    }
                 }
 
                 binding.textRepetition.text = repetitionCounters[prediction]?.count.toString()
-                binding.textDuration.text = getDurationInSeconds().toString()
+                binding.textDuration.text = getDurationFormatted()
             }
         }
     }
@@ -304,5 +320,12 @@ class CameraActivity : AppCompatActivity(), PoseLandmarkerHelper.LandmarkerListe
     fun getDurationInSeconds(): Long {
         val currentTime = System.currentTimeMillis()
         return (currentTime - startTime) / 1000
+    }
+
+    fun getDurationFormatted(): String {
+        val seconds = getDurationInSeconds()
+        val minutes = seconds / 60
+        val remainingSeconds = seconds % 60
+        return String.format("%02d:%02d", minutes, remainingSeconds)
     }
 }
