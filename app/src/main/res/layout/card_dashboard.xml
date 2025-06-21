@@ -8,7 +8,7 @@
     app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="180dp"
         android:layout_marginBottom="16dp">
 
@@ -19,39 +19,39 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="🔥 Kalori"
+            android:textAlignment="center"
             android:textColor="@color/main_black"
             android:textStyle="bold"
             android:textSize="24sp"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/card_value"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="6600"
             android:textColor="@color/main_black"
             android:textSize="34sp"
             android:textStyle="bold"
+            android:textAlignment="center"
             android:layout_marginTop="32dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="@id/card_title"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_title" />
 
         <TextView
             android:id="@+id/card_unit"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Kkal"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/main_black"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="@id/card_value"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_value" />
 
