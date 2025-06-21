@@ -15,8 +15,7 @@ class GuardianFragment : Fragment() {
 
     private var _binding: FragmentGuardianBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -35,6 +34,7 @@ class GuardianFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().actionBar?.hide()
         binding.btnSubmit.setOnClickListener {
             val intent = Intent(requireContext(), CameraActivity::class.java)
             startActivity(intent)
