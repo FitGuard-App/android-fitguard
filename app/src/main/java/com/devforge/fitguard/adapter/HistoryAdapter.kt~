@@ -31,7 +31,7 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ActivityViewHolder>()
         val item = items[position]
         holder.title.text = item.id.toString()
         holder.date.text = item.date?.let { DateHelper.formatDateToIndo(it) }
-        holder.time.text = item.date?.let { DateHelper.formatTimeToIndo(it) }
+        holder.time.text = item.date?.let { DateHelper.formatTime(it) }
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ResultActivity::class.java)

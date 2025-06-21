@@ -66,4 +66,6 @@
     <string name="history_record">History Record</string>
     <string name="image">image</string>
     <string name="date_example">Rabu, 32 Februari 2025</string>
+    <string name="date_icon">date icon</string>
+    <string name="time_icon">time icon</string>
 </resources>
