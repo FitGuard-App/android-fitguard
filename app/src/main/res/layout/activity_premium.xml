@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="64dp"
+    android:gravity="center_horizontal"
+    android:background="#1C1C1C">
+
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo_no_text"
+        android:contentDescription="App Logo"
+        android:layout_marginBottom="32dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• Bebas Iklan"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="• Fitur Komunitas"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="• Lebih banyak olahraga serta analisisnya"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Subscription Options -->
+    <RadioGroup
+        android:id="@+id/subscriptionGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/oneMonthOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_option_unselected"
+            android:text="1 Bulan\nRp20.000/bulan"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/main_black"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:button="@null"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp" />
+
+
+        <RadioButton
+            android:id="@+id/twelveMonthOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_option_unselected"
+            android:text="12 Bulan \nRp.15.000/bulan"
+            android:textColor="@color/main_black"
+            android:fontFamily="@font/inter_bold"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:button="@null"
+            android:padding="16dp" />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batalkan kapan saja tanpa penalti atau biaya"
+        android:textColor="#CCCCCC"
+        android:textSize="12sp"
+        android:fontFamily="@font/inter_thin"
+
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/subscribeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Coba Gratis dan berlangganan"
+        android:backgroundTint="#00D084"
+        android:fontFamily="@font/inter"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingVertical="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
+
+</LinearLayout>

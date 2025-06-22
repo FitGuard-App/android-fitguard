@@ -23,6 +23,7 @@
             android:layout_marginBottom="60dp"
             android:text="Your Personal Fitness Guardian"
             android:textColor="@color/white"
+            android:fontFamily="@font/inter_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

@@ -19,6 +19,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="Progress"
+            android:fontFamily="@font/inter_bold"
             android:textColor="@color/main_black"
             android:textSize="16sp"
             android:textStyle="bold"
